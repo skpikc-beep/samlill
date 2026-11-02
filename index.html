@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تطوير الشعار · باب الهروب</title>
+<link rel="icon" href="assets/app-icon.png">
+<style>
+  :root{
+    --ink:#0b0c0e;
+    --ink-2:#12141a;
+    --line:rgba(255,255,255,.10);
+    --muted:#9aa0ab;
+    --red:#df0a03;
+    --red-deep:#a00101;
+    --red-dark:#710202;
+    --orange:#f8a451;
+    --light:#ffe9ae;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 620px at 78% -8%, #2a0603 0%, transparent 62%),
+      radial-gradient(900px 520px at 8% 106%, #1a0a06 0%, transparent 60%),
+      var(--ink);
+    color:#f4f5f7;
+    font-family:"Segoe UI", "Noto Kufi Arabic", "Tahoma", system-ui, sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:34px 26px 90px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .brandline{display:flex;align-items:center;gap:14px}
+  .glyph{width:42px;height:42px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden;
+    box-shadow:0 6px 20px rgba(223,10,3,.28)}
+  .glyph img{width:100%;height:100%;object-fit:cover}
+  .brandline b{font-size:17px;letter-spacing:.5px}
+  .brandline span{display:block;font-size:12px;color:var(--muted);letter-spacing:2px;margin-top:-4px}
+  .pill{font-size:12.5px;color:#ffd7cf;border:1px solid rgba(223,10,3,.45);
+    background:linear-gradient(180deg,rgba(223,10,3,.18),rgba(223,10,3,.06));
+    padding:7px 14px;border-radius:999px;white-space:nowrap}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;padding:60px 0 46px}
+  .hero h1{font-size:clamp(30px,4.2vw,52px);line-height:1.25;margin:0 0 16px;font-weight:800}
+  .hero h1 em{font-style:normal;background:linear-gradient(180deg,#ff5a3c,#df0a03 55%,#8e0000);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:#c3c8d2;font-size:16.5px;margin:0 0 26px;max-width:52ch}
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:3px;
+    color:#ffb3a5;text-transform:uppercase;margin-bottom:18px}
+  .kicker::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,#df0a03,transparent)}
+
+  .stage{position:relative;border-radius:26px;background:#fff;padding:26px;
+    display:grid;place-items:center;min-height:420px;
+    box-shadow:0 40px 90px -40px rgba(223,10,3,.55), 0 0 0 1px rgba(255,255,255,.06)}
+  .stage img{width:100%;max-width:400px;height:auto;display:block}
+  .stage::after{content:"";position:absolute;inset:14px;border:1px dashed rgba(0,0,0,.08);border-radius:18px;pointer-events:none}
+
+  h2.section{font-size:13px;letter-spacing:3.5px;color:#8d93a0;font-weight:600;margin:0 0 22px;
+    display:flex;align-items:center;gap:14px}
+  h2.section::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:70px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));
+    border:1px solid var(--line);border-radius:18px;padding:24px 22px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;right:0;left:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.65}
+  .card h3{margin:0 0 8px;font-size:17px}
+  .card p{margin:0;color:#a9b0bb;font-size:14.5px}
+  .num{font-size:12px;letter-spacing:2px;color:#ff8d78;margin-bottom:10px;display:block}
+
+  /* variants */
+  .variants{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:18px;margin-bottom:74px}
+  .tile{border-radius:20px;border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;
+    justify-content:space-between;min-height:280px;position:relative;overflow:hidden}
+  .tile .im{flex:1;display:grid;place-items:center;padding:8px}
+  .tile .im img{max-width:100%;max-height:200px;height:auto;display:block}
+  .tile.white{background:#fff}
+  .tile.white .cap{color:#6b7280}
+  .tile.dark{background:#0f1116}
+  .tile.dark .im{background:#fff;border-radius:14px;padding:16px}
+  .cap{font-size:13px;color:#9aa0ab;margin-top:14px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .cap b{font-size:14px;color:inherit;font-weight:600}
+  .tile.white .cap b{color:#111}
+
+  /* colors */
+  .swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:74px}
+  .sw{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0f1116}
+  .sw .chip{height:104px}
+  .sw .meta{padding:12px 14px;font-size:12.5px;color:#98a0ab;line-height:1.5}
+  .sw .meta b{display:block;color:#eceff3;font-size:13.5px;letter-spacing:.3px}
+  .sw .meta code{font-family:ui-monospace,Menlo,monospace;color:#c9cfd8;font-size:12px}
+
+  /* rules */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:40px}
+  .rule{border:1px solid var(--line);border-radius:18px;padding:22px 24px;background:rgba(255,255,255,.025)}
+  .rule h4{margin:0 0 12px;font-size:15px;letter-spacing:.4px;display:flex;align-items:center;gap:9px}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .dot.ok{background:#2fbf71;box-shadow:0 0 12px #2fbf71}
+  .dot.no{background:#e5484d;box-shadow:0 0 12px #e5484d}
+  .rule ul{margin:0;padding-inline-start:18px;color:#a9b0bb;font-size:14.5px}
+  .rule li{margin:6px 0}
+
+  footer{border-top:1px solid var(--line);padding-top:22px;color:#6f7683;font-size:13px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:38px;gap:30px}
+    .grid3,.variants,.swatches,.rules{grid-template-columns:1fr}
+    .swatches{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brandline">
+      <div class="glyph"><img src="assets/app-icon.png" alt="علامة الشعار"></div>
+      <div>
+        <b>تطوير الهوية</b>
+        <span>ESCAPE DOOR</span>
+      </div>
+    </div>
+    <div class="pill">نسخة مطوّرة · بدون أشخاص · تجريدي</div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="kicker">العلامة الرئيسية</div>
+      <h1>شريط <em>S</em> سداسي…<br>وبابُ هروبٍ ينفتح على الضوء</h1>
+      <p>
+        نفس اللغة البصرية للشعار الأصلي: شريط ثلاثي الأبعاد لامع يشكّل حرف S داخل سداسي.
+        التطوير يضيف <b>باب خروج</b> في قلب الشكل: لوح يدور على محوره، وفتحة تسمح للضوء بالتسرّب
+        إلى الفراغ السالب — حرية تُقرأ من دون أي عنصر بشري.
+      </p>
+    </div>
+    <div class="stage">
+      <img src="assets/logo-escape-door.png" alt="الشعار المطوّر: شريط سداسي وباب هروب">
+    </div>
+  </section>
+
+  <h2 class="section">فكرة التصميم</h2>
+  <div class="grid3">
+    <div class="card">
+      <span class="num">01 — الهيكل</span>
+      <h3>السداسي المفتوح</h3>
+      <p>حواف حادة وزوايا سداسية تمنح القوة والحماية، بينما يبقى الشكل مفتوحاً من الجانبين فلا يُحاصر.</p>
+    </div>
+    <div class="card">
+      <span class="num">02 — الحركة</span>
+      <h3>شريط S بلا نهاية</h3>
+      <p>الشريط يدور على نفسه من الأعلى إلى الأسفل، فيقرأ كحرف S وكمسار مستمر في الوقت نفسه.</p>
+    </div>
+    <div class="card">
+      <span class="num">03 — المعنى</span>
+      <h3>الباب والضوء</h3>
+      <p>لوح الباب مائل على محوره، وخلفه هالة ضوء دافئة تتسرّب من الشق: مخرجٌ متاح، لا سجين ولا أشخاص.</p>
+    </div>
+  </div>
+
+  <h2 class="section">التنويعات</h2>
+  <div class="variants">
+    <div class="tile white">
+      <div class="im"><img src="assets/logo-escape-door.png" alt="النسخة الأساسية"></div>
+      <div class="cap"><b>الأساسية</b><span>خلفية فاتحة</span></div>
+    </div>
+    <div class="tile dark">
+      <div class="im"><img src="assets/logo-escape-door.png" alt="استخدام على خلفية داكنة"></div>
+      <div class="cap"><b>داكنة</b><span>وضع ليلي</span></div>
+    </div>
+    <div class="tile white">
+      <div class="im" style="max-height:200px;overflow:hidden;border-radius:14px">
+        <img src="assets/app-icon.png" alt="أيقونة التطبيق" style="max-height:180px">
+      </div>
+      <div class="cap"><b>الأيقونة</b><span>1024×1024</span></div>
+    </div>
+  </div>
+
+  <h2 class="section">لوحة الألوان</h2>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#df0a03"></div><div class="meta"><b>الأحمر الأساسي</b><code>#DF0A03</code></div></div>
+    <div class="sw"><div class="chip" style="background:#a00101"></div><div class="meta"><b>أحمر عميق</b><code>#A00101</code></div></div>
+    <div class="sw"><div class="chip" style="background:#710202"></div><div class="meta"><b>ظلّ الفولاذ</b><code>#710202</code></div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(180deg,#f8a451,#e95c2d)"></div><div class="meta"><b>برتقالي لامع</b><code>#F8A451</code></div></div>
+    <div class="sw"><div class="chip" style="background:#ffe9ae"></div><div class="meta"><b>ضوء الباب</b><code>#FFE9AE</code></div></div>
+  </div>
+
+  <h2 class="section">قواعد الاستخدام</h2>
+  <div class="rules">
+    <div class="rule">
+      <h4><span class="dot ok"></span> افعل</h4>
+      <ul>
+        <li>حافظ على مساحة حرة حول الشعار لا تقل عن ربع عرضه.</li>
+        <li>استخدمه على أبيض أو داكن جداً؛ الشعار عالي التباين.</li>
+        <li>استخدم الأيقونة للأحجام الصغيرة والشاشات.</li>
+      </ul>
+    </div>
+    <div class="rule">
+      <h4><span class="dot no"></span> لا تفعل</h4>
+      <ul>
+        <li>لا تُضف أشخاصاً أو ظلالاً داخل فتحة الباب.</li>
+        <li>لا تغيّر زاوية دوران الباب أو تلوين الضوء.</li>
+        <li>لا تضغط الشعار أو تمدّده أو تُدِرْه بزاوية مائلة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <span>ملفات الشعار في مجلد <code>assets/</code> — الشعار الأصلي محفوظ في <code>assets/source/</code></span>
+    <span>نسخة مطوّرة · تجريد كامل · بلا أشخاص</span>
+  </footer>
+
+</div>
+</body>
+</html>
